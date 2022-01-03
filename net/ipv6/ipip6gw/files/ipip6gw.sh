@@ -14,8 +14,8 @@ proto_ipip6gw_setup() {
 	local cfg="$1"
 	local remoteip
 
-	local df ipaddr peeraddr tunlink ttl tos zone mtu
-	json_get_vars df ipaddr peeraddr tunlink ttl tos zone mtu
+	local df ipaddr peeraddr tunlink ttl tos zone mtu tun_remoteip tun_localip tun_routes
+	json_get_vars df ipaddr peeraddr tunlink ttl tos zone mtu tun_remoteip tun_localip tun_routes
 
 	[ -z "$peeraddr" ] && {
 		proto_notify_error "$cfg" "MISSING_PEER_ADDRESS"
