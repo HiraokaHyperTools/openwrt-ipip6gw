@@ -58,7 +58,8 @@ proto_ipip6gw_setup() {
 	}
 
 	proto_init_update "ipip6gw-$cfg" 1
-	if [ -n "$tun_localip" -a -n "$tun_remoteip"]; then
+
+	if [ -n "$tun_localip" -a -n "$tun_remoteip" ]; then
 		proto_add_ipv4_address "$tun_localip" "" "" "$tun_remoteip"
 	fi
 
@@ -73,6 +74,7 @@ proto_ipip6gw_setup() {
 		esac
 	done
 
+	proto_add_tunnel
 	json_add_string mode ipip6
 	json_add_int mtu "${mtu:-1280}"
 	json_add_int ttl "${ttl:-64}"
@@ -81,7 +83,6 @@ proto_ipip6gw_setup() {
 	json_add_string remote "$peeraddr"
 	[ -n "$tunlink" ] && json_add_string link "$tunlink"
 	json_add_boolean df "${df:-1}"
-
 	proto_close_tunnel
 
 	proto_add_data
