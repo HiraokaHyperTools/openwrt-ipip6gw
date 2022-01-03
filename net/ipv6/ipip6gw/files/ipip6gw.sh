@@ -51,8 +51,21 @@ proto_ipip6gw_setup() {
 	}
 
 	proto_init_update "ipip6gw-$cfg" 1
+	if [ -n "$tun_localip" -a -n "$tun_remoteip"]; then
+		proto_add_ipv4_address "$tun_localip" "" "" "$tun_remoteip"
+	fi
 
-	proto_add_tunnel
+	for allowed_ip in ${tun_routes}; do
+		case "${allowed_ip}" in
+			*.*/*)
+				proto_add_ipv4_route "${allowed_ip%%/*}" "${allowed_ip##*/}"
+				;;
+			*.*)
+				proto_add_ipv4_route "${allowed_ip%%/*}" "32"
+				;;
+		esac
+	done
+
 	json_add_string mode ipip6
 	json_add_int mtu "${mtu:-1280}"
 	json_add_int ttl "${ttl:-64}"
@@ -68,7 +81,7 @@ proto_ipip6gw_setup() {
 	[ -n "$zone" ] && json_add_string zone "$zone"
 	proto_close_data
 
-	proto_send_update "$cfg"
+	proto_send_update "$cfg" || sleep 1
 }
 
 proto_ipip6gw_teardown() {

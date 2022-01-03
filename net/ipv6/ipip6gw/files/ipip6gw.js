@@ -45,6 +45,18 @@ return network.registerProtocol('ipip6gw', {
 		o.optional = true;
 		o.datatype = 'ip6addr("nomask")';
 
+		o = s.taboption('general', form.Value, 'tun_localip', _('Tunnel local IPv4 address'), _('This is the router IPv4 address inside tunnel.'));
+		o.optional = true;
+		o.datatype = 'ip4addr("nomask")';
+
+		o = s.taboption('general', form.Value, 'tun_remoteip', _('Tunnel remote IPv4 address'), _('This is the peer IPv4 address inside tunnel.'));
+		o.optional = true;
+		o.datatype = 'ip4addr("nomask")';
+
+		o = s.taboption('general', form.DynamicList, 'tun_routes', _('Allowed IPv4 addresses'), _("Optional. IP addresses and prefixes that this peer is allowed to use inside the tunnel. Usually the peer's tunnel IP addresses and the networks the peer routes through the tunnel."));
+		o.datatype = 'ip4addr';
+		o.optional = true;
+
 		o = s.taboption('general', widgets.NetworkSelect, 'tunlink', _('Bind interface'), _('Bind the tunnel to this interface (optional).'));
 		o.exclude = s.section;
 		o.nocreate = true;
