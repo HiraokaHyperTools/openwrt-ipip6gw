@@ -12,12 +12,17 @@
 
 logger $@ #dbg
 
+proto_ipip6gw_add_tun_route() {
+	append "$3" "$1"
+}
+
 proto_ipip6gw_setup() {
 	local cfg="$1"
-	local remoteip ip allowed_ip
+	local remoteip ip allowed_ip routes=""
 
 	local df ipaddr peeraddr tunlink ttl tos zone mtu tun_remoteip tun_localip tun_routes
-	json_get_vars df ipaddr peeraddr tunlink ttl tos zone mtu tun_remoteip tun_localip tun_routes
+	json_get_vars df ipaddr peeraddr tunlink ttl tos zone mtu tun_remoteip tun_localip
+	json_for_each_item proto_ipip6gw_add_tun_route tun_routes routes
 
 	[ -z "$peeraddr" ] && {
 		proto_notify_error "$cfg" "MISSING_PEER_ADDRESS"
@@ -57,7 +62,7 @@ proto_ipip6gw_setup() {
 		proto_add_ipv4_address "$tun_localip" "" "" "$tun_remoteip"
 	fi
 
-	for allowed_ip in ${tun_routes}; do
+	for allowed_ip in ${routes}; do
 		case "${allowed_ip}" in
 			*.*/*)
 				proto_add_ipv4_route "${allowed_ip%%/*}" "${allowed_ip##*/}"
