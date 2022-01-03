@@ -10,8 +10,6 @@
 	init_proto "$@"
 }
 
-logger $@ #dbg
-
 proto_ipip6gw_add_tun_route() {
 	append "$3" "$1"
 }
@@ -89,7 +87,16 @@ proto_ipip6gw_setup() {
 	[ -n "$zone" ] && json_add_string zone "$zone"
 	proto_close_data
 
-	proto_send_update "$cfg" || sleep 1
+	proto_send_update "$cfg" || {
+		logger -t "ipip6gw" -p warn \
+			It seems to fail on creation of ipip6 tunnel interface. \
+			Please observe output of ip-route (`ip -4 r` and `ip -6 r`) and ip-tunnel (`ip -4 t` and `ip -6 t`). \
+			Ensure there is no duplication of local/remote IPv6 addresses for this tunnel interface. \
+			Perhaps it may need to purge their routes/tunnels before starting tunnel interface.
+
+		# avoid very frequent restart loop.
+		sleep 1
+	}
 }
 
 proto_ipip6gw_teardown() {
