@@ -1,4 +1,4 @@
-# ipip6 package feed
+# ipip6gw package feed
 
 ## Description
 

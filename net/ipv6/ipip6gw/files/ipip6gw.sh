@@ -53,7 +53,7 @@ proto_ipip6gw_setup() {
 	proto_init_update "ipip6gw-$cfg" 1
 
 	proto_add_tunnel
-	json_add_string mode "ipip6gw"
+	json_add_string mode ipip6
 	json_add_int mtu "${mtu:-1280}"
 	json_add_int ttl "${ttl:-64}"
 	[ -n "$tos" ] && json_add_string tos "$tos"
