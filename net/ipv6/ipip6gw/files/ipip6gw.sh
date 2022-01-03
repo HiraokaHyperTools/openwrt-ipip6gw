@@ -54,12 +54,10 @@ proto_ipip6gw_setup() {
 
 	proto_init_update "ipip6gw-$cfg" 1
 	if [ -n "$tun_localip" -a -n "$tun_remoteip"]; then
-		logger tun_ip $tun_localip $tun_remoteip #dbg
 		proto_add_ipv4_address "$tun_localip" "" "" "$tun_remoteip"
 	fi
 
 	for allowed_ip in ${tun_routes}; do
-		logger tun_r $allowed_ip #dbg
 		case "${allowed_ip}" in
 			*.*/*)
 				proto_add_ipv4_route "${allowed_ip%%/*}" "${allowed_ip##*/}"
@@ -105,7 +103,7 @@ proto_ipip6gw_init_config() {
 	proto_config_add_string "peeraddr"
 	proto_config_add_string "tun_remoteip"
 	proto_config_add_string "tun_localip"
-	proto_config_add_string "tun_routes"
+	proto_config_add_array "tun_routes:list(string)"
 	proto_config_add_boolean "df"
 }
 
