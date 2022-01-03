@@ -37,12 +37,12 @@ return network.registerProtocol('ipip6gw', {
 	renderFormOptions: function (s) {
 		var o;
 
-		o = s.taboption('general', form.Value, 'peeraddr', _('Remote IPv6 address or FQDN'), _('The IPv6 address or the fully-qualified domain name of the remote tunnel end (optional).'));
+		o = s.taboption('general', form.Value, 'peeraddr', _('Remote IPv6 address or FQDN'), _('The IPv6 address or the fully-qualified domain name of the remote tunnel end.'));
 		o.optional = false;
 		o.datatype = 'or(hostname,ip6addr("nomask"))';
 
 		o = s.taboption('general', form.Value, 'ipaddr', _('Local IPv6 address'), _('The local IPv6 address serving this AFTR.'));
-		o.optional = true;
+		o.optional = false;
 		o.datatype = 'ip6addr("nomask")';
 
 		o = s.taboption('general', form.Value, 'tun_localip', _('Tunnel local IPv4 address'), _('This is this router\'s pseudo IPv4 address living in ipip6 tunnel.'));
