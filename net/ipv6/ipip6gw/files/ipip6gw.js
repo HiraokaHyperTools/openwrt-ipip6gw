@@ -55,7 +55,7 @@ return network.registerProtocol('ipip6gw', {
 		o.datatype = 'ip4addr("nomask")';
 		o.placeholder = '192.0.0.2';
 
-		o = s.taboption('general', form.DynamicList, 'tun_routes', _('Allowed IPv4 addresses'), _("IP addresses and prefixes that this peer is allowed to use inside the tunnel. Usually the peer's tunnel IP addresses and the networks the peer routes through the tunnel. Perhaps all of private IP address ranges (<code>10.0.0.0/8</code> <code>172.16.0.0/12</code> <code>192.168.0.0/16</code>) should be set."));
+		o = s.taboption('general', form.DynamicList, 'tun_routes', _('Allowed IPv4 addresses'), _("IP addresses and prefixes that this peer is allowed to use inside the tunnel.<br>Usually the peer's tunnel IP addresses and the networks the peer routes through the tunnel.<br>Maybe all of private IP address ranges (<code>10.0.0.0/8</code> <code>172.16.0.0/12</code> <code>192.168.0.0/16</code>) should be covered."));
 		o.datatype = 'ip4addr';
 		o.optional = true;
 
