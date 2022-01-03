@@ -10,7 +10,7 @@
 	init_proto "$@"
 }
 
-logger ipip6gw $@ #dbg
+logger $@ #dbg
 
 proto_ipip6gw_setup() {
 	local cfg="$1"
@@ -105,7 +105,7 @@ proto_ipip6gw_init_config() {
 	proto_config_add_string "peeraddr"
 	proto_config_add_string "tun_remoteip"
 	proto_config_add_string "tun_localip"
-	proto_config_add_string 'tun_routes:list(string)'
+	proto_config_add_string "tun_routes"
 	proto_config_add_boolean "df"
 }
 
