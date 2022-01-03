@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ipip6gw
 PKG_VERSION:=0.1
-PKG_RELEASE:=11
+PKG_RELEASE:=12
 PKG_LICENSE:=GPL-2.0
 PKG_MAINTAINER:=kenjiuno
 
