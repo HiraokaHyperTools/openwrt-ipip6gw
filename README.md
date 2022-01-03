@@ -2,7 +2,7 @@
 
 ## Description
 
-This is an ipip6gw package feed containing community maintained package.
+This is an ipip6gw (`AFTR for DS-Lite`) package feed containing community maintained package.
 
 ## Usage
 
@@ -20,10 +20,10 @@ This feed should be included and enabled by default in the OpenWrt buildroot. To
 ./scripts/feeds install ipip6gw
 ```
 
-The ipip6 package should now appear in menuconfig.
+The ipip6gw package should now appear in: `make MENUCONFIG_COLOR=blackbg menuconfig`
 
-This will make package `bin/packages/mipsel_24kc/ipip6gw/ipip6gw.1-4_all.ipk` or such.
+This will make package `bin/packages/mipsel_24kc/ipip6gw/ipip6gw_0.1-9_all.ipk` or such.
 
 ```
-make package/ipip6/compile
+make package/ipip6gw/compile
 ```

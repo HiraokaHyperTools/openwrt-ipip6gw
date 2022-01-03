@@ -1,5 +1,5 @@
 #!/bin/sh
-# ipip6.sh - ipip6 tunnel backend
+# ipip6gw.sh - ipip6 tunnel backend
 # Copyright (c) 2013 OpenWrt.org
 # Copyright (c) 2021 kenjiuno
 
